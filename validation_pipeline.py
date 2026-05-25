@@ -18,6 +18,7 @@
 # Author: Reconstructed for phenotypic validation workflow
 # ============================================================
 
+import argparse
 import cv2
 import numpy as np
 import pandas as pd
@@ -27,20 +28,51 @@ import random
 import math
 
 # ============================================================
+# ARGUMENT PARSER
+# ============================================================
+
+parser = argparse.ArgumentParser(
+    description="Geometric Validation Pipeline"
+)
+
+parser.add_argument(
+    "--image_dir",
+    type=str,
+    default="raw_images",
+    help="Directory containing raw images"
+)
+
+parser.add_argument(
+    "--output_dir",
+    type=str,
+    default="validation_results",
+    help="Directory to save outputs"
+)
+
+parser.add_argument(
+    "--n_images",
+    type=int,
+    default=100,
+    help="Number of images to randomly sample"
+)
+
+parser.add_argument(
+    "--reference_mm",
+    type=float,
+    default=14.0,
+    help="Known reference patch size in mm"
+)
+
+args = parser.parse_args()
+
+# ============================================================
 # CONFIGURATION
 # ============================================================
 
-# Directory containing raw images
-IMAGE_DIR = "raw_images"
-
-# Output directory
-OUTPUT_DIR = "validation_results"
-
-# Known physical size of reference patch (mm)
-REFERENCE_MM = 14.0
-
-# Number of images to sample
-N_IMAGES = 100
+IMAGE_DIR = args.image_dir
+OUTPUT_DIR = args.output_dir
+N_IMAGES = args.n_images
+REFERENCE_MM = args.reference_mm
 
 # Supported image formats
 IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".tif", ".tiff"]
