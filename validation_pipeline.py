@@ -306,7 +306,7 @@ def interactive_annotation():
             "width_x2": width_points[1][0],
             "width_y2": width_points[1][1],
 
-            "mean_pixels": mean_pixels,
+            # "mean_pixels": mean_pixels,
 
             "mm_per_px": mm_per_px,
 
